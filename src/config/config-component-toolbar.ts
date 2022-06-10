@@ -80,7 +80,7 @@ export const useComponentToolbarConfig = createToolbarConfig(
                 tooltip: '电压互感器',
               },
               {
-                id: '6',
+                id: '7',
                 iconName: 'PlusCircleOutlined',
                 tooltip: '接地开关',
               },
