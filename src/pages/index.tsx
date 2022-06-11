@@ -4,19 +4,18 @@ import type { IAppLoad, NsGraph } from '@antv/xflow'
 import { XFlow, XFlowCanvas } from '@antv/xflow'
 /** 图的各种扩展交互组件 */
 import { FlowchartFormPanel, KeyBindings, CanvasMiniMap, CanvasScaleToolbar, CanvasSnapline, CanvasContextMenu, CanvasToolbar,
-  CanvasNodePortTooltip, FlowchartExtension,FlowchartNodePanel } from '@antv/xflow'
+  CanvasNodePortTooltip, FlowchartExtension,FlowchartNodePanel, NodeCollapsePanel } from '@antv/xflow'
 /** 图的配置项 */
 import { useGraphConfig } from '@/config/config-graph'
 import { useMenuConfig } from '@/config/config-menu'
 import { useActionToolbarConfig } from '@/config/config-action-toolbar'
 import { useComponentToolbarConfig } from '@/config/config-component-toolbar'
 import { useKeybindingConfig } from '@/config/config-keybinding'
-
+import * as panelConfig from '@/config/config-dnd-panel'
 import { message } from 'antd'
 import '@antv/xflow/dist/index.css'
+import 'antd/dist/antd.css';
 import './index.less'
-// 引入节点编辑组件
-import Form from '@/components/form'
 
 export interface IProps { }
 
@@ -72,12 +71,12 @@ const IndexPage: React.FC<IProps> = (props) => {
     const graph = await app.getGraphInstance()
     graph.on('node:click', ({ node }) => {
       const nodeData: NsGraph.INodeConfig = node.getData()
-      message.success(`${nodeData.id}节点被点击了`)
+      // message.success(`${nodeData.id}节点被点击了`)
     })
     graph.on('edge:click', ({ edge }) => {
       edge.toFront()
       const edgeData: NsGraph.IEdgeConfig = edge.getData()
-      message.success(`${edgeData.id}连线被点击了`)
+      // message.success(`${edgeData.id}连线被点击了`)
     })
   }
 
@@ -97,8 +96,6 @@ const IndexPage: React.FC<IProps> = (props) => {
       onLoad={onLoad}
       isAutoCenter={true}
     >
-      {/* 组件编辑画布 */}
-      {/* <Form></Form> */}
       {/* 顶部菜单画布 */}
       <CanvasToolbar
         layout={'horizontal'}
@@ -106,31 +103,13 @@ const IndexPage: React.FC<IProps> = (props) => {
         position={{ top: 0, left: 0, right: 0, height: 40 }}
       />
       {/* 组件列表画布 */}
-      <CanvasToolbar
-        layout={'vertical'}
-        config={toolbarConfig}
-        position={{ top: 200, left: 12, bottom: 200 }}
-      />
       <FlowchartExtension />
-      <FlowchartNodePanel
-        position={{ width: 162, top: 40, bottom: 0, left: 0 }}
-        show={true}
-        showHeader={false}
-        showOfficial={false}
-        registerNode={{
-          title: '自定义节点',
-          key: 'custom',
-          nodes: [
-            {
-              component: () => <div>节点1</div>,
-              popover: () => <div>自定义节点</div>,
-              name: 'custom-node-indicator',
-              width: 210,
-              height: 130,
-              label: '自定义节点',
-            },
-          ]
-        }}
+      <NodeCollapsePanel
+        collapsible={false}
+        header={<h4 className="dnd-panel-header"> 组件面板 </h4>}
+        onNodeDrop={panelConfig.onNodeDrop}
+        nodeDataService={panelConfig.nodeDataService}
+        position={{ top: 170, bottom: 0, left: 0, width: 200 }}
       />
       <XFlowCanvas config={graphConfig} position={{ top: 40, left: 0, right: 0, bottom: 0 }}>
         {/* 画布缩放栏组件 */}
@@ -143,24 +122,26 @@ const IndexPage: React.FC<IProps> = (props) => {
             height: 39,
           }} />
         {/* 画布小地图组件 */}
-        {/* <CanvasMiniMap
+        <CanvasMiniMap
           miniMapClz="xflow-custom-minimap"
           nodeFillColor="#ccc"
           minimapOptions={{
             width: 200,
             height: 120,
           }}
-          position={{ top: 200, right: 12 }}
-        /> */}
+          position={{ width: 200, top: 0, left: 0 }}
+        />
         {/* 画布背景组件 */}
         <CanvasSnapline color="#1890ff" />
         {/* 菜单组件 */}
         <CanvasContextMenu config={menucConfig} />
         {/* 链接器组件 */}
+        {/* TODO: 配置链接器 */}
         <CanvasNodePortTooltip />
       </XFlowCanvas>
       {/* 配置表单组件 */}
-      <FlowchartFormPanel show={true} position={{ width: 300, top: 40, bottom: 0, right: 0 }} />
+      {/* TODO：配置表单项 */}
+      <FlowchartFormPanel show={true} position={{ width: 240, top: 40, bottom: 0, right: 0 }} />
       {/* 键盘事件组件 */}
       <KeyBindings config={keybindingConfig} />
     </XFlow>
