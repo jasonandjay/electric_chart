@@ -1,11 +1,13 @@
 import { createToolbarConfig } from '@antv/xflow'
 import { XFlowGraphCommands, XFlowNodeCommands, IconStore } from '@antv/xflow'
-import { PlusCircleOutlined, SaveOutlined, DeleteOutlined } from '@ant-design/icons'
+import { PlusCircleOutlined, SaveOutlined, DeleteOutlined, ExportOutlined, EyeOutlined } from '@ant-design/icons'
 import type { NsGraphCmd, NsNodeCmd } from '@antv/xflow'
 
 IconStore.set('PlusCircleOutlined', PlusCircleOutlined)
 IconStore.set('SaveOutlined', SaveOutlined)
 IconStore.set('DeleteOutlined', DeleteOutlined)
+IconStore.set('ExportOutlined', ExportOutlined)
+IconStore.set('EyeOutlined', EyeOutlined)
 
 export const useActionToolbarConfig = createToolbarConfig(toolbarConfig => {
   /** 生产 toolbar item */
@@ -17,9 +19,11 @@ export const useActionToolbarConfig = createToolbarConfig(toolbarConfig => {
           items: [
             {
               id: '1',
-              text: '添加节点',
-              iconName: 'PlusCircleOutlined',
-              tooltip: 'horizontal',
+              text: '预览',
+              iconName: 'EyeOutlined',
+              onClick: async ({ commandService }) => {
+                // TODO: 预览电路图
+              },
             },
             {
               id: XFlowGraphCommands.SAVE_GRAPH_DATA.id,
@@ -30,24 +34,20 @@ export const useActionToolbarConfig = createToolbarConfig(toolbarConfig => {
                   XFlowGraphCommands.SAVE_GRAPH_DATA.id,
                   {
                     saveGraphDataService: async (meta, data) => {
+                      // TODO: 存储数据到mobx or model
                       console.log(data)
                     },
                   },
                 )
               },
             },
-          ],
-        },
-      ]
-      toolbar.extraGroups = [
-        {
-          name: 'extra',
-          items: [
             {
               id: '3',
-              iconName: 'DeleteOutlined',
-              text: '退出',
-              tooltip: '退出编辑',
+              text: '导出',
+              iconName: 'ExportOutlined',
+              onClick: async ({ commandService }) => {
+                // TODO: 导出PDF
+              },
             },
           ],
         },
