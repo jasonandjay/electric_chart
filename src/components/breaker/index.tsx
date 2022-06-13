@@ -4,14 +4,14 @@ import { useAppContext } from '@antv/xflow';
 import './index.less';
 import img from './img.svg';
 
-const PresenceIndicating: NsGraph.INodeRender = (props) => {
+const Breaker: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="PresenceIndicating-container">
+    <div className="Breaker-container">
       <img src={img} />
     </div>
   );
 };
-export default PresenceIndicating;
+export default Breaker;
 export const Icon = img;

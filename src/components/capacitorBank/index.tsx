@@ -4,15 +4,15 @@ import { useAppContext } from '@antv/xflow';
 import './index.less';
 import img from './img.svg';
 
-const PresenceIndicating: NsGraph.INodeRender = (props) => {
+const CapacitorBank: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="PresenceIndicating-container">
+    <div className="CapacitorBank-container">
       <img src={img} />
     </div>
   );
 };
-export default PresenceIndicating;
+export default CapacitorBank;
 
 export const Icon = img;
