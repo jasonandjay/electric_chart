@@ -8,7 +8,7 @@ const PresenceIndicating: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="PresenceIndicating-container">
+    <div className="PresenceIndicating-container component">
       <img src={img} />
     </div>
   );

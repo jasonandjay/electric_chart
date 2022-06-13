@@ -8,7 +8,7 @@ const EarthSwitch: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="EarthSwitch-container">
+    <div className="EarthSwitch-container component">
       <img src={img} />
     </div>
   );

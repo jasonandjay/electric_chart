@@ -8,7 +8,7 @@ const Breaker: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="Breaker-container">
+    <div className="Breaker-container component">
       <img src={img} />
     </div>
   );

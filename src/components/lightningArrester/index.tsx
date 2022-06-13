@@ -8,7 +8,7 @@ const LightningArrester: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="LightningArrester-container">
+    <div className="LightningArrester-container component">
       <img src={img} />
     </div>
   );

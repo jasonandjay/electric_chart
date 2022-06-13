@@ -22,6 +22,8 @@ import { useMenuConfig } from '@/config/config-menu';
 import { useActionToolbarConfig } from '@/config/config-action-toolbar';
 import { useKeybindingConfig } from '@/config/config-keybinding';
 import * as panelConfig from '@/config/config-dnd-panel';
+import { useCmdConfig } from '@/config/config-cmd';
+
 import '@antv/xflow/dist/index.css';
 import 'antd/dist/antd.css';
 import './index.less';
@@ -32,8 +34,9 @@ const IndexPage: React.FC<IProps> = (props) => {
   /** 画布配置 */
   const graphConfig = useGraphConfig(props);
   const menucConfig = useMenuConfig(props);
-  const keybindingConfig = useKeybindingConfig();
+  const keybindingConfig = useKeybindingConfig(props);
   const actionConfig = useActionToolbarConfig(props);
+  const cmdConfig = useCmdConfig(props);
 
   /** 画布渲染数据 */
   const [graphData, setGraphData] = useState<NsGraph.IGraphData>();
@@ -116,6 +119,7 @@ const IndexPage: React.FC<IProps> = (props) => {
     <XFlow
       className="xflow-user-container"
       graphData={graphData}
+      commandConfig={cmdConfig}
       graphLayout={{
         layoutType: 'dagre',
         layoutOptions: {
@@ -142,6 +146,7 @@ const IndexPage: React.FC<IProps> = (props) => {
         onNodeDrop={panelConfig.onNodeDrop}
         nodeDataService={panelConfig.nodeDataService}
         position={{ top: 170, bottom: 0, left: 0, width: 200 }}
+        footerPosition={{ height: 0 }}
       />
       <XFlowCanvas
         config={graphConfig}

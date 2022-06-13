@@ -8,7 +8,7 @@ const VoltageTransformer: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="VoltageTransformer-container">
+    <div className="VoltageTransformer-container component">
       <img src={img} />
     </div>
   );

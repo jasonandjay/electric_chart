@@ -8,7 +8,7 @@ const CapacitorBank: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
 
   return (
-    <div className="CapacitorBank-container">
+    <div className="CapacitorBank-container component">
       <img src={img} />
     </div>
   );

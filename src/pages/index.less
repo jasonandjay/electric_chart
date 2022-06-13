@@ -46,3 +46,22 @@
     text-overflow: ellipsis;
   }
 }
+
+// 公共组件样式
+.component{
+  box-sizing: content-box;
+  border: 1px solid transparent;
+  padding: 5px;
+  border-radius: 3px;
+}
+.x6-node-selected {
+  .component {
+    background-color: rgba(48, 86, 227, 0.05);
+    border: 1px solid #3057e3;
+    box-shadow: 0 0 3px 3px rgba(48, 86, 227, 0.15);
+    &:hover {
+      background-color: #fff;
+      box-shadow: 0 0 5px 5px rgba(48, 86, 227, 0.15);
+    }
+  }
+}
