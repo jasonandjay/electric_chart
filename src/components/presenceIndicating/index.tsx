@@ -2,7 +2,7 @@
 import type { NsGraph } from '@antv/xflow';
 import { useAppContext } from '@antv/xflow';
 import './index.less';
-import img from './img.png';
+import img from './img.svg';
 
 const PresenceIndicating: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();

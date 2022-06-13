@@ -50,24 +50,6 @@ export const useComponentToolbarConfig = createToolbarConfig(
                 id: '4',
                 iconName: 'PlusCircleOutlined',
                 tooltip: '带电显示',
-                onClick: async ({ commandService }) => {
-                  const nodeName = `Node-${id}`;
-                  commandService.executeCommand<NsNodeCmd.AddNode.IArgs>(
-                    XFlowNodeCommands.ADD_NODE.id,
-                    {
-                      nodeConfig: {
-                        id: nodeName,
-                        renderKey: 'PRESENCEINDICATING',
-                        label: nodeName,
-                        x: 100 + id * 5,
-                        y: 50 + id * 5,
-                        width: 39,
-                        height: 124,
-                      },
-                    },
-                  );
-                  id += 1;
-                },
               },
               {
                 id: '5',

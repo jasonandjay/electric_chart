@@ -39,6 +39,7 @@ export const useGraphConfig = createGraphConfig((config) => {
   /** 设置XFlow画布需要渲染的React节点/边 */
   config.setNodeRender('NODE1', Node1);
   config.setNodeRender('NODE2', Node2);
+  //带电显示
   config.setNodeRender('PRESENCEINDICATING', PRESENCEINDICATING);
   config.setNodeRender('Breaker', Breaker);
   config.setNodeRender('CAPACITORBANK', CAPACITORBANK);
