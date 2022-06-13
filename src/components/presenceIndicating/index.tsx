@@ -14,3 +14,4 @@ const PresenceIndicating: NsGraph.INodeRender = (props) => {
   );
 };
 export default PresenceIndicating;
+export const Icon = img;

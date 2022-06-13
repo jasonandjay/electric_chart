@@ -1,8 +1,8 @@
-// 带电显示
+// 避雷器
 import type { NsGraph } from '@antv/xflow';
 import { useAppContext } from '@antv/xflow';
 import './index.less';
-import img from './img.png';
+import img from './img.svg';
 
 const PresenceIndicating: NsGraph.INodeRender = (props) => {
   const ctx = useAppContext();
@@ -14,3 +14,4 @@ const PresenceIndicating: NsGraph.INodeRender = (props) => {
   );
 };
 export default PresenceIndicating;
+export const Icon = img;

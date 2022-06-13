@@ -1,10 +1,10 @@
 @light-border: ~'1px solid #d9d9d9';
 
-#root{
+#root {
   height: 100%;
 }
-.horizontal.xflow-toolbar-root{
-  height:40px;
+.horizontal.xflow-toolbar-root {
+  height: 40px;
   box-sizing: border-box;
   border-bottom: @light-border;
 }
@@ -13,10 +13,9 @@
   align-items: center;
   justify-content: center;
   width: 190px;
-  height: 32px;
-  padding: 0 16px;
+  height: 60px;
+  padding: 10px;
   overflow: hidden;
-  font-weight: 600;
   white-space: nowrap;
   text-overflow: ellipsis;
   background-color: #fff;
@@ -24,5 +23,26 @@
   border-radius: 4px;
   &:hover {
     background: ~'linear-gradient(270deg,#f8faff,rgba(248,250,255,0)) !important';
+  }
+  i {
+    height: 50px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      max-height: 100%;
+      max-width: 100%;
+    }
+  }
+  p {
+    flex: 1;
+    overflow: hidden;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
