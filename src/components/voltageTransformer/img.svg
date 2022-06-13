@@ -1,4 +1,4 @@
-<svg id="组_1" data-name="组 1" xmlns="http://www.w3.org/2000/svg" width="90" height="316" viewBox="0 0 45 158">
+<svg id="组_2" data-name="组 2" xmlns="http://www.w3.org/2000/svg" width="100" height="380" viewBox="0 0 50 190">
   <defs>
     <style>
       .cls-1 {
@@ -14,11 +14,10 @@
       }
     </style>
   </defs>
-  <rect id="矩形_6" data-name="矩形 6" class="cls-1" x="7" y="38" width="31" height="63"/>
-  <rect id="矩形_7" data-name="矩形 7" x="22" width="2" height="58"/>
-  <rect id="矩形_7_拷贝" data-name="矩形 7 拷贝" x="22" y="101" width="2" height="38"/>
-  <rect id="矩形_8" data-name="矩形 8" y="138" width="45" height="2"/>
-  <rect id="矩形_8_拷贝" data-name="矩形 8 拷贝" x="11" y="147" width="23" height="2"/>
-  <rect id="矩形_8_拷贝_2" data-name="矩形 8 拷贝 2" x="17" y="156" width="11" height="2"/>
-  <path id="多边形_1" data-name="多边形 1" class="cls-2" d="M677.292,220.288L673.923,232l-3.656-11.7Z" transform="translate(-651 -163)"/>
+  <rect id="矩形_9" data-name="矩形 9" class="cls-1" x="7" y="35" width="37" height="55"/>
+  <rect id="矩形_10" data-name="矩形 10" x="24" width="2" height="108"/>
+  <circle id="椭圆_1" data-name="椭圆 1" class="cls-1" cx="25" cy="130" r="22"/>
+  <circle id="椭圆_1_拷贝_2" data-name="椭圆 1 拷贝 2" class="cls-1" cx="25" cy="165" r="22"/>
+  <path id="形状_1" data-name="形状 1" class="cls-2" d="M993,281h3l5,17,5-17h3l-8,25Z" transform="translate(-976 -164)"/>
+  <path id="形状_1_拷贝" data-name="形状 1 拷贝" class="cls-2" d="M993,324h3l5,17,5-17h3l-8,25Z" transform="translate(-976 -164)"/>
 </svg>
