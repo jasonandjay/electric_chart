@@ -1,4 +1,4 @@
-import { createGraphConfig } from '@antv/xflow';
+import { createGraphConfig, NsGraph } from '@antv/xflow';
 /** 自定义React节点/边 */
 import Node1 from '@/components/node1';
 import Node2 from '@/components/node2';
@@ -33,6 +33,8 @@ interface NODEDATASITEM {
     icon: string;
     component: ReactNode;
     label: string;
+    width?: number;
+    height?: number;
   };
 }
 export const NODEDATAS: NODEDATASITEM = {
@@ -40,31 +42,38 @@ export const NODEDATAS: NODEDATASITEM = {
     icon: PRESENCEINDICATING_icon,
     component: PRESENCEINDICATING,
     label: '带电显示',
+    width: 30,
+    height: 110
   },
   BREAKER: {
     icon: BREAKER_icon,
     component: BREAKER,
     label: '断路器',
+    width: 10,
   },
   CAPACITORBANK: {
     icon: CAPACITORBANK_icon,
     component: CAPACITORBANK,
     label: '电容柜',
+    width: 10,
   },
   EARTHSWITCH: {
     icon: EARTHSWITCH_icon,
     component: EARTHSWITCH,
     label: '接地开关',
+    width: 10,
   },
   LIGHTNINGARRESTER: {
     icon: LIGHTNINGARRESTER_icon,
     component: LIGHTNINGARRESTER,
     label: '避雷器',
+    width: 10,
   },
   VOLTAGETRANSFORMER: {
     icon: VOLTAGETRANSFORMER_icon,
     component: VOLTAGETRANSFORMER,
     label: '电压互感器',
+    width: 10,
   },
 };
 
@@ -91,7 +100,7 @@ export const useGraphConfig = createGraphConfig((config) => {
   config.setNodeRender('NODE2', Node2);
   // 自定义节点
   Object.entries(NODEDATAS).forEach(([key, { component }]) => {
-    config.setNodeRender(key, component);
+    config.setNodeRender(key, component as NsGraph.INodeRender);
   });
   config.setEdgeRender('EDGE1', Edge1);
   config.setEdgeRender('EDGE2', Edge2);

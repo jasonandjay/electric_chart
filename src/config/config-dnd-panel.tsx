@@ -4,6 +4,7 @@ import type {
   NsNodeCmd,
   IGraphCommandService,
   NsGraph,
+  FlowchartNodePanel,
 } from '@antv/xflow';
 import { XFlowConstants, XFlowNodeCommands, uuidv4 } from '@antv/xflow';
 import { NODEDATAS } from '@/config/config-graph';
@@ -54,3 +55,19 @@ export const nodeDataService: NsNodeCollapsePanel.INodeDataService = async (
     },
   ];
 };
+
+export const registerNode = ()=>{
+  const nodes = Object.keys(NODEDATAS).map((key, i) => ({
+    component: NODEDATAS[key]?.component,
+    popover: () => <div>{NODEDATAS[key]?.label}</div>,
+    name: key,
+    width: NODEDATAS[key]?.width,
+    height: NODEDATAS[key]?.height || 50,
+    label: NODEDATAS[key]?.label
+  }));
+  return {
+    key: 'custom',
+    title: '定制组件',
+    nodes
+  }
+}

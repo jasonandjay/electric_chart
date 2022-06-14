@@ -1,9 +1,7 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // import { DND_RENDER_ID, NODE_WIDTH, NODE_HEIGHT } from './constant'
-import { uuidv4, NsGraph, NsGraphStatusCommand } from '@antv/xflow'
-// import type { NsRenameNodeCmd } from './cmd-extensions/cmd-rename-node-modal'
+import { uuidv4, NsGraph } from '@antv/xflow'
 import type { NsNodeCmd, NsEdgeCmd, NsGraphCmd } from '@antv/xflow'
-// import type { NsDeployDagCmd } from './cmd-extensions/cmd-deploy'
+
 /** mock 后端接口调用 */
 export namespace MockApi {
   export const NODE_COMMON_PROPS = {
@@ -19,85 +17,87 @@ export namespace MockApi {
   }
   /** 加载图数据的api */
   export const loadGraphData = async (meta: NsGraph.IGraphMeta) => {
+    console.log(meta)
     const nodes: NsGraph.INodeConfig[] = [
       {
         ...NODE_COMMON_PROPS,
         id: 'node1',
-        label: '算法节点-1',
-        ports: [
-          {
-            id: 'node1-input-1',
-            type: NsGraph.AnchorType.INPUT,
-            group: NsGraph.AnchorGroup.TOP,
-            tooltip: '输入桩',
-          },
-          {
-            id: 'node1-output-1',
-            type: NsGraph.AnchorType.OUTPUT,
-            group: NsGraph.AnchorGroup.BOTTOM,
-            tooltip: '输出桩',
-          },
-        ] as NsGraph.INodeAnchor[],
+        label: '流程1',
+        x: 140,
+        y: 210,
+        des: '流程1的描述',
+        ports: {
+          items: [
+            {
+              id: 'node1-input-1',
+              group: 'left',
+            },
+            {
+              id: 'node1-output-1',
+              group: 'right',
+            },
+          ],
+        },
       },
       {
         ...NODE_COMMON_PROPS,
         id: 'node2',
-        label: '算法节点-2',
-        ports: [
-          {
-            id: 'node2-input-1',
-            type: NsGraph.AnchorType.INPUT,
-            group: NsGraph.AnchorGroup.TOP,
-            tooltip: '输入桩',
-            connected: true,
-          },
-          {
-            id: 'node2-output-1',
-            type: NsGraph.AnchorType.OUTPUT,
-            group: NsGraph.AnchorGroup.BOTTOM,
-            tooltip: '输出桩',
-          },
-        ] as NsGraph.INodeAnchor[],
+        label: '流程2',
+        des: '流程2的描述',
+        x: 430,
+        y: 120,
+        ports: {
+          items: [
+            {
+              id: 'node2-input-1',
+              group: 'left',
+            },
+            {
+              id: 'node2-output-1',
+              group: 'right',
+            },
+          ],
+        },
       },
       {
         ...NODE_COMMON_PROPS,
         id: 'node3',
-        label: '算法节点-3',
-        ports: [
-          {
-            id: 'node3-input-1',
-            type: NsGraph.AnchorType.INPUT,
-            group: NsGraph.AnchorGroup.TOP,
-            tooltip: '输入桩',
-            connected: true,
-          },
-          {
-            id: 'node3-output-1',
-            type: NsGraph.AnchorType.OUTPUT,
-            group: NsGraph.AnchorGroup.BOTTOM,
-            tooltip: '输出桩',
-          },
-        ] as NsGraph.INodeAnchor[],
+        label: '流程3',
+        des: '流程3的描述',
+        x: 430,
+        y: 290,
+        ports: {
+          items: [
+            {
+              id: 'node3-input-1',
+              group: 'left',
+            },
+            {
+              id: 'node3-output-1',
+              group: 'right',
+            },
+          ],
+        },
       },
       {
         ...NODE_COMMON_PROPS,
         id: 'node4',
-        label: '算法节点-4',
-        ports: [
-          {
-            id: 'node4-input-1',
-            type: NsGraph.AnchorType.INPUT,
-            group: NsGraph.AnchorGroup.TOP,
-            tooltip: '输入桩',
-            connected: true,
-          },
-          {
-            id: 'node4-output-1',
-            type: NsGraph.AnchorType.OUTPUT,
-            group: NsGraph.AnchorGroup.BOTTOM,
-            tooltip: '输出桩',
-          },
-        ] as NsGraph.INodeAnchor[],
+        label: '流程4',
+        des: '流程4的描述',
+        x: 740,
+        y: 210,
+        ports: {
+          items: [
+            {
+              id: 'node4-input-1',
+              group: 'left',
+            },
+            {
+              id: 'node4-output-1',
+              group: 'right',
+            },
+          ],
+        },
       },
     ]
     const edges: NsGraph.IEdgeConfig[] = [
@@ -117,9 +117,16 @@ export namespace MockApi {
       },
       {
         id: uuidv4(),
-        source: 'node1',
+        source: 'node2',
         target: 'node4',
-        sourcePortId: 'node1-output-1',
+        sourcePortId: 'node2-output-1',
+        targetPortId: 'node4-input-1',
+      },
+      {
+        id: uuidv4(),
+        source: 'node3',
+        target: 'node4',
+        sourcePortId: 'node3-output-1',
         targetPortId: 'node4-input-1',
       },
     ]
@@ -136,75 +143,36 @@ export namespace MockApi {
       data: graphData,
     }
   }
-  /** 部署图数据的api */
-  // export const deployDagService: NsDeployDagCmd.IDeployDagService = async (
-  //   meta: NsGraph.IGraphMeta,
-  //   graphData: NsGraph.IGraphData,
-  // ) => {
-  //   console.log('deployService api', meta, graphData)
-  //   return {
-  //     success: true,
-  //     data: graphData,
-  //   }
-  // }
 
   /** 添加节点api */
   export const addNode: NsNodeCmd.AddNode.IArgs['createNodeService'] = async (
     args: NsNodeCmd.AddNode.IArgs,
   ) => {
-    console.info('addNode service running, add node:', args)
-    const portItems = [
-      {
-        type: NsGraph.AnchorType.INPUT,
-        group: NsGraph.AnchorGroup.TOP,
-        tooltip: '输入桩1',
-      },
-      {
-        type: NsGraph.AnchorType.INPUT,
-        group: NsGraph.AnchorGroup.TOP,
-        tooltip: '输入桩2',
-      },
-      {
-        type: NsGraph.AnchorType.INPUT,
-        group: NsGraph.AnchorGroup.TOP,
-        tooltip: '输入桩3',
-      },
-      {
-        type: NsGraph.AnchorType.OUTPUT,
-        group: NsGraph.AnchorGroup.BOTTOM,
-        tooltip: '输出桩',
-      },
-    ] as NsGraph.INodeAnchor[]
-
-    const { id, ports = portItems, groupChildren } = args.nodeConfig
+    const { id, ports } = args.nodeConfig
     const nodeId = id || uuidv4()
-    /** 这里添加连线桩 */
+    /** 这里添加连线桩 */ args
     const node: NsNodeCmd.AddNode.IArgs['nodeConfig'] = {
-      // ...NODE_COMMON_PROPS,
+      width: 200,
+      height: 60,
       ...args.nodeConfig,
-      height: 110,
       id: nodeId,
-      ports: (ports as NsGraph.INodeAnchor[]).map(port => {
-        return { ...port, id: uuidv4() }
-      }),
+      ports: ports
+        ? ports
+        : {
+            items: [
+              {
+                id: uuidv4(),
+                group: NsGraph.AnchorGroup.LEFT,
+              },
+              {
+                id: uuidv4(),
+                group: NsGraph.AnchorGroup.RIGHT,
+              },
+            ] as NsGraph.INodeAnchor[],
+          },
     }
-    /** group没有链接桩 */
-    if (groupChildren && groupChildren.length) {
-      node.ports = []
-    }
-    console.info('addNode service running, add node:', node)
     return node
   }
-
-  /** 更新节点 name，可能依赖接口判断是否重名，返回空字符串时，不更新 */
-  // export const renameNode: NsRenameNodeCmd.IUpdateNodeNameService = async (
-  //   name,
-  //   node,
-  //   graphMeta,
-  // ) => {
-  //   console.log('rename node', node, name, graphMeta)
-  //   return { err: null, nodeName: name }
-  // }
 
   /** 删除节点的api */
   export const delNode: NsNodeCmd.DelNode.IArgs['deleteNodeService'] = async args => {
@@ -227,37 +195,4 @@ export namespace MockApi {
     console.info('delEdge service running, del edge:', args)
     return true
   }
-
-  let runningNodeId = 0
-  const statusMap = {} as NsGraphStatusCommand.IStatusInfo['statusMap']
-  let graphStatus: NsGraphStatusCommand.StatusEnum = NsGraphStatusCommand.StatusEnum.DEFAULT
-  export const graphStatusService: NsGraphStatusCommand.IArgs['graphStatusService'] = async () => {
-    if (runningNodeId < 4) {
-      statusMap[`node${runningNodeId}`] = { status: NsGraphStatusCommand.StatusEnum.SUCCESS }
-      statusMap[`node${runningNodeId + 1}`] = { status: NsGraphStatusCommand.StatusEnum.PROCESSING }
-      runningNodeId += 1
-      graphStatus = NsGraphStatusCommand.StatusEnum.PROCESSING
-    } else {
-      runningNodeId = 0
-      statusMap.node4 = { status: NsGraphStatusCommand.StatusEnum.SUCCESS }
-      graphStatus = NsGraphStatusCommand.StatusEnum.SUCCESS
-    }
-    return {
-      graphStatus: graphStatus,
-      statusMap: statusMap,
-    }
-  }
-  export const stopGraphStatusService: NsGraphStatusCommand.IArgs['graphStatusService'] =
-    async () => {
-      Object.entries(statusMap).forEach(([, val]) => {
-        const { status } = val as { status: NsGraphStatusCommand.StatusEnum }
-        if (status === NsGraphStatusCommand.StatusEnum.PROCESSING) {
-          val.status = NsGraphStatusCommand.StatusEnum.ERROR
-        }
-      })
-      return {
-        graphStatus: NsGraphStatusCommand.StatusEnum.ERROR,
-        statusMap: statusMap,
-      }
-    }
 }

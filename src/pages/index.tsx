@@ -14,6 +14,7 @@ import {
   CanvasNodePortTooltip,
   FlowchartExtension,
   FlowchartNodePanel,
+  FlowchartCanvas,
   NodeCollapsePanel,
 } from '@antv/xflow';
 /** 图的配置项 */
@@ -115,10 +116,12 @@ const IndexPage: React.FC<IProps> = (props) => {
     });
   };
 
+  console.log('panelConfig...', panelConfig);
   return (
     <XFlow
       className="xflow-user-container"
-      graphData={graphData}
+      // graphData={graphData}
+      // graphConfig={graphConfig}
       commandConfig={cmdConfig}
       graphLayout={{
         layoutType: 'dagre',
@@ -140,16 +143,23 @@ const IndexPage: React.FC<IProps> = (props) => {
       />
       {/* 组件列表画布 */}
       <FlowchartExtension />
-      <NodeCollapsePanel
+      {/* <NodeCollapsePanel
         collapsible={false}
         header={<h4 className="dnd-panel-header"> 组件面板 </h4>}
         onNodeDrop={panelConfig.onNodeDrop}
         nodeDataService={panelConfig.nodeDataService}
         position={{ top: 170, bottom: 0, left: 0, width: 200 }}
         footerPosition={{ height: 0 }}
+        bodyPosition={{ bottom: 0 }}
+      /> */}
+      <FlowchartNodePanel
+        showHeader={false}
+        defaultActiveKey={["custom"]}
+        registerNode={panelConfig.registerNode()}
+        position={{ width: 200, top: 40, bottom: 0, left: 0 }}
       />
-      <XFlowCanvas
-        config={graphConfig}
+      <FlowchartCanvas
+        // config={graphConfig}
         position={{ top: 40, left: 0, right: 0, bottom: 0 }}
       >
         {/* 画布缩放栏组件 */}
@@ -163,7 +173,7 @@ const IndexPage: React.FC<IProps> = (props) => {
           }}
         />
         {/* 画布小地图组件 */}
-        <CanvasMiniMap
+        {/* <CanvasMiniMap
           miniMapClz="xflow-custom-minimap"
           nodeFillColor="#ccc"
           minimapOptions={{
@@ -171,7 +181,7 @@ const IndexPage: React.FC<IProps> = (props) => {
             height: 120,
           }}
           position={{ width: 200, top: 0, left: 0 }}
-        />
+        /> */}
         {/* 画布背景组件 */}
         <CanvasSnapline color="#1890ff" />
         {/* 菜单组件 */}
@@ -179,7 +189,7 @@ const IndexPage: React.FC<IProps> = (props) => {
         {/* 链接器组件 */}
         {/* TODO: 配置链接器 */}
         <CanvasNodePortTooltip />
-      </XFlowCanvas>
+      </FlowchartCanvas>
       {/* 配置表单组件 */}
       {/* TODO：配置表单项 */}
       <FlowchartFormPanel
